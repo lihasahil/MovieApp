@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import MovieContextProvider from "./Context/MovieContextProvider.jsx";
 import Navbar from "./components/Navbar.jsx";
-import Favorites from "./pages/Favourites.jsx";
+import Favourites from "./pages/Favourites.jsx";
 import { ToastContainer } from "react-toastify";
 import MovieDetails from "./pages/MovieDetails.jsx";
 
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/favourites",
-    element: <Favorites />,
+    element: <Favourites />,
   },
   {
     path: "/movie/:id",
