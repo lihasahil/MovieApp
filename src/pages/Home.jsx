@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import MovieContext from "../Context/MovieContext";
 import Search from "../components/Search";
-import MovieCard from "../components/Moviecard";
+import MovieCard from "../components/MovieCard";
 
 const Home = () => {
   const { movie, isLoading } = useContext(MovieContext);

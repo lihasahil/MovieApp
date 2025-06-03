@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import MovieContext from "../Context/MovieContext";
-import MovieCard from "../components/Moviecard";
+import MovieCard from "../components/MovieCard";
 
 const Favourites = () => {
   const { favourites } = useContext(MovieContext); //gets favourites movie list from MovieContext
