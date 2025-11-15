@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single+Ink:wght@100..900&family=Momo+Signature&family=Outfit:wght@100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -116,5 +118,19 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+.font-momo {
+  font-family: "Momo Signature", cursive;
+}
+
+@keyframes slide {
+  0%,
+  100% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(400%);
   }
 }
