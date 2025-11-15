@@ -1,5 +1,6 @@
 import React from "react";
-import type { Movie, MovieDetails } from "./MovieContextProvider";
+import type { Movie } from "./MovieContextProvider";
+import { MovieDetail } from "@/types/movie-detail";
 
 export interface MovieContextType {
   isLoading: boolean;
@@ -9,7 +10,7 @@ export interface MovieContextType {
   favourites: Movie[];
   toggleFavourite: (movie: Movie) => void;
   fetchMovieById: (id: string) => Promise<void>;
-  selectedMovie: MovieDetails | null;
+  selectedMovie: MovieDetail | null;
   selectedLoading: boolean;
 }
 

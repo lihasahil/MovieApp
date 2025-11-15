@@ -1,6 +1,7 @@
 import React, { useEffect, useState, ReactNode } from "react";
 import MovieContext from "./MovieContext";
 import { toast } from "react-toastify";
+import { MovieDetail } from "@/types/movie-detail";
 
 // -------------------
 // Interfaces
@@ -13,14 +14,6 @@ export interface Movie {
   Poster: string;
 }
 
-export interface MovieDetails extends Movie {
-  Response: string;
-  Genre?: string;
-  Plot?: string;
-  Actors?: string;
-  Director?: string;
-  Runtime?: string;
-}
 
 interface MovieContextProviderProps {
   children: ReactNode;
@@ -35,7 +28,7 @@ const MovieContextProvider: React.FC<MovieContextProviderProps> = ({
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [movie, setMovie] = useState<Movie[]>([]);
-  const [selectedMovie, setSelectedMovie] = useState<MovieDetails | null>(null);
+  const [selectedMovie, setSelectedMovie] = useState<MovieDetail | null>(null);
   const [selectedLoading, setSelectedLoading] = useState<boolean>(false);
   const [query, setQuery] = useState<string>("titanic");
 
@@ -94,7 +87,7 @@ const MovieContextProvider: React.FC<MovieContextProviderProps> = ({
     setSelectedLoading(true);
     try {
       const res = await fetch(`${API_URL}&i=${id}`);
-      const data: MovieDetails = await res.json();
+      const data: MovieDetail = await res.json();
 
       if (data.Response === "True") {
         setSelectedMovie(data);

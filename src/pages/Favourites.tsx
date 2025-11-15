@@ -3,7 +3,7 @@ import MovieContext from "../Context/MovieContext";
 import MovieCard from "../components/MovieCard";
 
 const Favourites = () => {
-  const { favourites } = useContext(MovieContext); //gets favourites movie list from MovieContext
+  const { favourites } = useContext(MovieContext);
 
   return (
     <div className="p-4 mt-16">

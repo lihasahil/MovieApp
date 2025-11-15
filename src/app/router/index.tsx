@@ -8,6 +8,8 @@ import { NotFound } from "../not-found";
 import { withSuspense } from "@/components/layouts/with-suspense";
 
 const Home = lazy(() => import("../../pages/Home"));
+const Favourites = lazy(() => import("../../pages/Favourites"));
+const MovieDetail = lazy(() => import("../../pages/MovieDetails"));
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +20,8 @@ export const router = createBrowserRouter([
     children: [
       // Site routes ( Public / Unprotected )
       { path: "/", element: withSuspense(Home) },
+      { path: "/", element: withSuspense(Favourites) },
+      { path: "/movie/:id", element: withSuspense(MovieDetail) },
 
       // Catch-all route for unmatched routes
       { path: "*", element: <NotFound className="min-h-screen" /> },
