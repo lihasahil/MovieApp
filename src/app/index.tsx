@@ -1,6 +1,5 @@
+import MovieContextProvider from "@/Context/MovieContextProvider";
 import { Outlet } from "react-router";
-
-import MovieContextProvider from "src/Context/MovieContextProvider";
 
 /**
  * Main App Component

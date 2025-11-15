@@ -6,6 +6,10 @@
     "moduleResolution": "bundler",
     "strict": true,
     "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["node"],
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
