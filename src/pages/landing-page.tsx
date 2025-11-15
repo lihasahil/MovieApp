@@ -75,7 +75,7 @@ export default function LandingPage() {
 
                 <Button
                   type="submit"
-                  className="shrink-0 bg-red-500 cursor-pointer text-white px-8 py-3 mr-3 rounded-md font-bold hover:bg-red-700 transition-all duration-300 text-sm md:text-base"
+                  className="shrink-0 bg-[#E50914] cursor-pointer text-white px-8 py-3 mr-3 rounded-sm font-bold hover:bg-red-700 transition-all duration-300 text-sm md:text-base"
                 >
                   Search
                 </Button>

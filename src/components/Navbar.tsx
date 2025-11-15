@@ -1,29 +1,37 @@
-import React from "react";
+import MovieContext from "@/Context/MovieContext";
+import { useContext } from "react";
+import { Film } from "lucide-react";
 
 const Navbar = () => {
+  const { favourites } = useContext(MovieContext);
+
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-white shadow-md px-6 py-4 flex justify-between items-center">
-      <div className="flex items-center gap-2">
-        <img src="/movie.svg" alt="MM" className="size-12" />
-        <span className="text-base font-bold text-[#a0522d] font-['Momo_Signature']">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-linear-to-r from-slate-900 via-slate-800 to-slate-900 backdrop-blur-md border-b border-amber-900/30 shadow-2xl px-6 py-4 flex justify-between items-center">
+      <div className="flex items-center gap-3">
+        <img src="/movie.svg" alt="MM" className="size-10" />
+        <span className="text-lg font-bold bg-linear-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent font-momo">
           MovieMania
         </span>
       </div>
-      <div className="flex items-center space-x-6">
-        <a href="/" className="text-gray-700 hover:text-blue-600 font-medium">
+      <div className="flex items-center space-x-8">
+        <a
+          href="/"
+          className="text-amber-100 hover:text-amber-400 font-medium transition-colors duration-300"
+        >
           Home
         </a>
         <div className="relative">
           <a
             href="/favourites"
-            className="text-gray-700 hover:text-blue-600 font-medium"
+            className="text-amber-100 hover:text-amber-400 font-medium transition-colors duration-300"
           >
             Favourites
           </a>
-
-          <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-            !
-          </span>
+          {favourites.length > 0 && (
+            <span className="absolute -top-3 -right-4 bg-linear-to-r from-amber-500 to-amber-600 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-lg">
+              {favourites.length > 99 ? "99+" : favourites.length}
+            </span>
+          )}
         </div>
       </div>
     </nav>

@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
         Component: HeaderLayout,
         children: [
           { path: "/home", element: withSuspense(Home) },
-          { path: "/favourite", element: withSuspense(Favourites) },
+          { path: "/favourites", element: withSuspense(Favourites) },
           { path: "/movie/:id", element: withSuspense(MovieDetail) },
         ],
       },
