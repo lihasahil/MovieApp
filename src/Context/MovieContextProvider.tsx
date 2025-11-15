@@ -57,7 +57,7 @@ const MovieContextProvider = ({ children }) => {
       getMovies(`${API_URL}&s=${query}`);
     }, 3000);
     return () => clearTimeout(timeOut);
-  }, [query]);
+  }, [query, API_URL]);
 
   //API call for getting movies details by Id
   const fetchMovieById = async (id) => {
