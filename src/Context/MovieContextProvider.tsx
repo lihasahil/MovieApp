@@ -1,18 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, ReactNode } from "react";
 import MovieContext from "./MovieContext";
 import { toast } from "react-toastify";
 
-const MovieContextProvider = ({ children }) => {
+// -------------------
+// Interfaces
+// -------------------
+export interface Movie {
+  Title: string;
+  Year: string;
+  imdbID: string;
+  Type: string;
+  Poster: string;
+}
+
+export interface MovieDetails extends Movie {
+  Response: string;
+  Genre?: string;
+  Plot?: string;
+  Actors?: string;
+  Director?: string;
+  Runtime?: string;
+}
+
+interface MovieContextProviderProps {
+  children: ReactNode;
+}
+
+const MovieContextProvider: React.FC<MovieContextProviderProps> = ({
+  children,
+}) => {
   const API_URL = `https://www.omdbapi.com/?apikey=${
     import.meta.env.VITE_API_KEY
   }`;
-  const [isLoading, setIsLoading] = useState(true);
-  const [movie, setMovie] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
-  const [selectedLoading, setSelectedLoading] = useState(false);
-  const [query, setQuery] = useState("titanic");
-  const [favourites, setFavourites] = useState(() => {
-    // Load from localStorage on first render
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [movie, setMovie] = useState<Movie[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<MovieDetails | null>(null);
+  const [selectedLoading, setSelectedLoading] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>("titanic");
+
+  // Load from localStorage on first render
+  const [favourites, setFavourites] = useState<Movie[]>(() => {
     const stored = localStorage.getItem("favourites");
     return stored ? JSON.parse(stored) : [];
   });
@@ -22,52 +50,54 @@ const MovieContextProvider = ({ children }) => {
     localStorage.setItem("favourites", JSON.stringify(favourites));
   }, [favourites]);
 
-  //Add to favourites functionality which returns an array
-  const toggleFavourite = (movie) => {
-    const exists = favourites.find((fav) => fav.imdbID === movie.imdbID);
+  // Toggle favourite functionality
+  const toggleFavourite = (movieItem: Movie) => {
+    const exists = favourites.some((fav) => fav.imdbID === movieItem.imdbID);
 
     const updated = exists
-      ? favourites.filter((fav) => fav.imdbID !== movie.imdbID)
-      : [...favourites, movie];
+      ? favourites.filter((fav) => fav.imdbID !== movieItem.imdbID)
+      : [...favourites, movieItem];
 
     setFavourites(updated);
-
     toast.success(exists ? "Removed from favourites" : "Added to favourites");
   };
 
-  //API call for getting movies details by search
-  const getMovies = async (url) => {
+  // Fetch movies by search
+  const getMovies = async (url: string) => {
     setIsLoading(true);
     try {
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data);
+
       if (data.Response === "True") {
-        setIsLoading(false);
         setMovie(data.Search);
       } else {
-        console.log("Error Obtained");
+        console.error("No movies found.");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching movies:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
   useEffect(() => {
-    let timeOut = setTimeout(() => {
+    const timeout = setTimeout(() => {
       getMovies(`${API_URL}&s=${query}`);
     }, 3000);
-    return () => clearTimeout(timeOut);
+
+    return () => clearTimeout(timeout);
   }, [query, API_URL]);
 
-  //API call for getting movies details by Id
-  const fetchMovieById = async (id) => {
+  // Fetch movie by IMDb ID
+  const fetchMovieById = async (id: string) => {
     setSelectedLoading(true);
     try {
       const res = await fetch(`${API_URL}&i=${id}`);
-      //gets response saved to data
-      const data = await res.json();
+      const data: MovieDetails = await res.json();
+
       if (data.Response === "True") {
-        setSelectedMovie(data); //function sets data to selectedMovie
+        setSelectedMovie(data);
       }
     } catch (err) {
       console.error("Error fetching movie by ID:", err);
@@ -75,8 +105,8 @@ const MovieContextProvider = ({ children }) => {
       setSelectedLoading(false);
     }
   };
+
   return (
-    //helps pass data down components tree
     <MovieContext.Provider
       value={{
         isLoading,
