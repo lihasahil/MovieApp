@@ -7,6 +7,7 @@ import { ErrorFallback } from "../error-fallback";
 import { NotFound } from "../not-found";
 import { withSuspense } from "@/components/layouts/with-suspense";
 
+const LandingPage = lazy(() => import("../../pages/landing-page"));
 const Home = lazy(() => import("../../pages/Home"));
 const Favourites = lazy(() => import("../../pages/Favourites"));
 const MovieDetail = lazy(() => import("../../pages/MovieDetails"));
@@ -19,8 +20,9 @@ export const router = createBrowserRouter([
 
     children: [
       // Site routes ( Public / Unprotected )
-      { path: "/", element: withSuspense(Home) },
-      { path: "/", element: withSuspense(Favourites) },
+      { path: "/", element: withSuspense(LandingPage) },
+      { path: "/home", element: withSuspense(Home) },
+      { path: "/favourite", element: withSuspense(Favourites) },
       { path: "/movie/:id", element: withSuspense(MovieDetail) },
 
       // Catch-all route for unmatched routes

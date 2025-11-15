@@ -12,6 +12,7 @@ export interface MovieContextType {
   fetchMovieById: (id: string) => Promise<void>;
   selectedMovie: MovieDetail | null;
   selectedLoading: boolean;
+  searchMovies: (searchQuery: string) => void;
 }
 
 const MovieContext = React.createContext<MovieContextType>({
@@ -24,6 +25,7 @@ const MovieContext = React.createContext<MovieContextType>({
   fetchMovieById: async () => {},
   selectedMovie: null,
   selectedLoading: false,
+  searchMovies: () => {},
 });
 
 export default MovieContext;

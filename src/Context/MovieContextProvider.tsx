@@ -14,7 +14,6 @@ export interface Movie {
   Poster: string;
 }
 
-
 interface MovieContextProviderProps {
   children: ReactNode;
 }
@@ -55,32 +54,41 @@ const MovieContextProvider: React.FC<MovieContextProviderProps> = ({
     toast.success(exists ? "Removed from favourites" : "Added to favourites");
   };
 
-  // Fetch movies by search
-  const getMovies = async (url: string) => {
+  // Immediate search function (no debounce)
+  const searchMovies = async (searchQuery: string) => {
+    if (!searchQuery.trim()) return;
+    
     setIsLoading(true);
+    setQuery(searchQuery);
+    
     try {
-      const res = await fetch(url);
+      const res = await fetch(`${API_URL}&s=${searchQuery}`);
       const data = await res.json();
 
       if (data.Response === "True") {
         setMovie(data.Search);
       } else {
+        setMovie([]);
         console.error("No movies found.");
       }
     } catch (error) {
       console.error("Error fetching movies:", error);
+      setMovie([]);
     } finally {
       setIsLoading(false);
     }
   };
 
+  // Debounced search for typing in search box
   useEffect(() => {
+    if (!query) return;
+    
     const timeout = setTimeout(() => {
-      getMovies(`${API_URL}&s=${query}`);
-    }, 3000);
+      searchMovies(query);
+    }, 800);
 
     return () => clearTimeout(timeout);
-  }, [query, API_URL]);
+  }, [query]);
 
   // Fetch movie by IMDb ID
   const fetchMovieById = async (id: string) => {
@@ -111,6 +119,7 @@ const MovieContextProvider: React.FC<MovieContextProviderProps> = ({
         fetchMovieById,
         selectedMovie,
         selectedLoading,
+        searchMovies,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import MovieContext from "../Context/MovieContext";
 
 const Search = () => {
@@ -11,7 +11,7 @@ const Search = () => {
 
       <form
         action="#"
-        onSubmit={(e) => e.preventDefault()} //prevent reloading
+        onSubmit={(e) => e.preventDefault()}
         className="flex justify-center"
       >
         <div className="w-full max-w-md">
