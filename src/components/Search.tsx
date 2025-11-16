@@ -16,7 +16,7 @@ const Search = () => {
         className="flex justify-center"
       >
         <div className="w-full max-w-xl relative">
-          <SearchIcon className="absolute left-4 top-3.5 w-5 h-5 text-amber-500/60" />
+          <SearchIcon className="absolute z-9 left-4 top-3.5 w-5 h-5 text-amber-500/60" />
           <input
             type="text"
             placeholder="Search movies by title..."

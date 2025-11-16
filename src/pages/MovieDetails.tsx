@@ -1,12 +1,21 @@
 import { useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import MovieContext from "@/Context/MovieContext";
 import { PageLoader } from "@/app/page-loader";
 import { motion } from "framer-motion";
-import { Star, Clapperboard, Users, Trophy, TrendingUp } from "lucide-react";
+import {
+  Star,
+  Clapperboard,
+  Users,
+  Trophy,
+  TrendingUp,
+  MoveLeft,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const MovieDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { fetchMovieById, selectedMovie, selectedLoading } =
     useContext(MovieContext);
 
@@ -54,6 +63,16 @@ const MovieDetails = () => {
           <div className="absolute inset-0 bg-linear-to-r from-slate-950/40 via-transparent to-transparent" />
 
           <div className="absolute inset-0 backdrop-blur-[1px]" />
+
+          {/* Button on top */}
+          <div className="absolute top-6 left-6 z-50">
+            <Button
+              onClick={() => navigate(-1)}
+              className="px-4 py-2 rounded-lg cursor-pointer bg-amber-500 hover:bg-amber-600 text-white font-semibold shadow-lg"
+            >
+              <MoveLeft /> Go Back
+            </Button>
+          </div>
         </div>
 
         {/* Content */}

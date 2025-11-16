@@ -1,13 +1,18 @@
 import MovieContext from "@/Context/MovieContext";
 import { useContext } from "react";
 import { Film } from "lucide-react";
+import { useNavigate } from "react-router";
 
 const Navbar = () => {
   const { favourites } = useContext(MovieContext);
+  const navigate = useNavigate();
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-linear-to-r from-slate-900 via-slate-800 to-slate-900 backdrop-blur-md border-b border-amber-900/30 shadow-2xl px-6 py-4 flex justify-between items-center">
-      <div className="flex items-center gap-3">
+      <div
+        className="flex items-center gap-3  cursor-pointer"
+        onClick={() => navigate("/")}
+      >
         <img src="/movie.svg" alt="MM" className="size-10" />
         <span className="text-lg font-bold bg-linear-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent font-momo">
           MovieMania
@@ -15,7 +20,7 @@ const Navbar = () => {
       </div>
       <div className="flex items-center space-x-8">
         <a
-          href="/"
+          href="/home"
           className="text-amber-100 hover:text-amber-400 font-medium transition-colors duration-300"
         >
           Home

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import MovieContext from "../Context/MovieContext";
 import Search from "../components/Search";
 import MovieCard from "../components/MovieCard";
-import { Film } from 'lucide-react';
+import { Film } from "lucide-react";
 
 const Home = () => {
   const { movie, isLoading } = useContext(MovieContext);
@@ -13,8 +13,8 @@ const Home = () => {
       {isLoading ? (
         <div className="w-full flex flex-col justify-center items-center py-20">
           <div className="flex items-center gap-3 mb-8">
-            <Film className="w-10 h-10 text-amber-500" />
-            <span className="text-2xl font-bold bg-linear-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">
+            <img src="/movie.svg" alt="MM" className="size-10" />
+            <span className="text-2xl font-bold bg-linear-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent font-momo">
               MovieMania
             </span>
           </div>
